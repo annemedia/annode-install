@@ -134,7 +134,11 @@ See the full annode documentation at https://www.anne.network/files
 
 # Contribution & Collaboration:
 
+If you are a software developer and excited to work with ANNE technology, message us at https://t.me/anne_unplugged or contact ANNE Media at https://x.com/annemedia_web
+
 The install script has a limitation if MariaDB is already installed and there are any existing databases present. On user confirmation, these databases would be lost. A pull request to the following specification will be accepted:
+
+**1)**
 
 - If MariaDB is already installed and the version is 10.5+, prompt the user with three options.
   
@@ -144,7 +148,9 @@ The install script has a limitation if MariaDB is already installed and there ar
        
 - Adjust the related code to facilitate this feature.
 
-If you are a software developer and excited to work with ANNE technology, message us at https://t.me/anne_unplugged or contact ANNE Media at https://x.com/annemedia_web
+**2)**
+
+Compatibility adjustments for unsupported Linux distributions
   
 # LICENSE
 
