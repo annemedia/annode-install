@@ -91,7 +91,8 @@ or
 
 ### Basic Upgrade:
 `wget https://raw.githubusercontent.com/annemedia/annode-install/main/annode-upgrade.sh`
-`sudo bash annode-upgrade.sh  `
+
+`sudo bash annode-upgrade.sh`
 
 ### Upgrade with Database Restore:
 
