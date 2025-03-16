@@ -58,7 +58,7 @@ Download the Script:
 
 **Sets Up Service:** Creates a systemd service (annode.service) for automatic startup in non-desktop environments.
 
-**Configures Firewall:** Opens port 9115 if csf, firewalld, or ufw is installed.
+**Configures Firewall:** Opens port 9115 (or custom if you change the PORT variable at the top of the script) if csf, firewalld, or ufw is installed.
 
 ## Post-Installation:
 
@@ -113,7 +113,7 @@ Use your root password from the install output:
 
 `sudo bash annode-upgrade.sh restore '<your-root-password>'  `
 
-## Troubleshooting:
+# Troubleshooting:
 
 **Unsupported Systems:** If your distribution isn’t Debian or RHEL-based, the script exits with manual install instructions.
 
@@ -129,9 +129,23 @@ Use your root password from the install output:
 
 **Lite Mode:** It is also possible to run the annode in Lite mode (Spectator mode) with as little as: 1 CPU, 1GB RAM, 20GB HDD (Linux) - Use the lite flag for a lighter annode setup, reducing resource usage by disabling mempool and graph cleaning.
 
-### Additional Info:
+# Additional Info:
 See the full annode documentation at https://www.anne.network/files
 
+# Contribution & Collaboration:
+
+The install script has a limitation if MariaDB is already installed and there are any existing databases present. On user confirmation, these databases would be lost. A pull request to the following specification will be accepted:
+
+- If MariaDB is already installed and the version is 10.5+, prompt the user with three options.
+  
+    1) Purge & reinstall MariaDB
+    2) Prompt for their MariaDB root password
+    3) Abort
+       
+- Adjust the related code to facilitate this feature.
+
+If you are a software developer and excited to work with ANNE technology, message us at https://t.me/anne_unplugged or contact ANNE Media at https://x.com/annemedia_web
+  
 # LICENSE
 
 This is free and unencumbered software released into the public domain.
