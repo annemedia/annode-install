@@ -14,10 +14,16 @@ It installs dependencies, configures MariaDB, restores the latest database snaps
 Generate your keys at https://www.anne.network/aon.html if you don’t have them.
 
 ## Installation: 
+
 Download the Script:
 `wget https://raw.githubusercontent.com/annemedia/annode-install/main/annode-install.sh`  
 
 ### Run the Script:
+
+**WARNING:**
+
+**DO NOT RUN THIS SCRIPT IF YOU HAVE EXISTING MARIADB DATABASES YOU CAN'T LOSE. If MariaDB is already installed, you’ll be prompted to purge it (losing existing databases) or abort.**
+
 `sudo bash annode-install.sh your-nid your-seed [lite]`
 
 - your-nid: Your ANNE Neuron ID (nid) (required)
