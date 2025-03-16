@@ -1,8 +1,8 @@
 # ANNODE Installation Script
 
-This Bash script simplifies the setup of an ANNODE on Debian or RHEL-based Linux systems.
+This Bash script simplifies and fully automates the setup of an ANNODE on Debian or RHEL-based Linux systems. Whether you are a novice, intermediate, or an expert Linux user, this script is for you. 
 
-It installs dependencies, configures MariaDB, restores the latest database snapshot, deploys the node software, and sets up a systemd service (for non-desktop environments).
+It installs dependencies, configures MariaDB, restores the latest database snapshot, deploys the node software, and sets up a systemd service (for non-GUI environments) or creates a bash script (for GUI environments) you can use to run your ANNODE.
 
 ## Prequisities
 
