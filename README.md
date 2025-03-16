@@ -22,7 +22,7 @@ Download the Script:
 
 **WARNING:**
 
-**DO NOT RUN THIS SCRIPT IF YOU HAVE EXISTING MARIADB DATABASES YOU CAN'T LOSE. If MariaDB is already installed, you’ll be prompted to purge it (losing existing databases) or abort.**
+**DO NOT RUN THIS SCRIPT IF YOU HAVE EXISTING MARIADB DATABASES YOU CAN'T LOSE. If MariaDB is already installed, it will be reinstalled. Albeit, you’ll be prompted to purge it (losing existing databases) or abort.**
 
 `sudo bash annode-install.sh your-nid your-seed [lite]`
 
