@@ -39,7 +39,7 @@ Download the Script:
 
 #### Examples:  
 ##### Standard mainnet annode:
-`sudo bash annode-install.sh mynodeid mysecret`
+`sudo bash annode-install.sh mynid mysecret`
 
 ##### Lite mode mainnet annode:
 `sudo bash annode-install.sh mynid mysecret 1`
