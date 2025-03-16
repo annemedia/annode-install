@@ -109,7 +109,9 @@ get_package_manager() {
       Dependencies:
       mariadb 10.5+
       unzip
-      java jdk 17\e[0m"
+      java jdk 17\e[0m
+      
+      See https://www.anne.network/files for further instructions."
     exit 3;
 }
 
