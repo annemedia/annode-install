@@ -321,7 +321,6 @@ sed -i "s/P2P.rebroadcastTo.*/P2P.rebroadcastTo=$PEERSLIST/" "$DIR/conf/node.pro
  
 if [ -n "$LITE" ]; then
   echo "anne.mempool = false" >> "$DIR/conf/node.properties"
-  echo "anne.bootCleanGraph = false" >> "$DIR/conf/node.properties"
 fi
 
 if type csf &> /dev/null; then
