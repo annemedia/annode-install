@@ -35,7 +35,7 @@ Download the Script:
 
 - your-nid: Your ANNE Neuron ID (nid) (required)
 - your-seed: Your ANNE Secret (seed) (required)
-- lite: Optional boolean flag to run annode in lite (spectator) mode (disables mempool and graph cleaning).
+- lite: Optional boolean flag to run annode in lite (spectator) mode (disables mempool).
 
 #### Examples:  
 ##### Standard mainnet annode:
