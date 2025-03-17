@@ -58,7 +58,7 @@ Download the Script:
 
 **Sets Up Service:** Creates a systemd service (annode.service) for automatic startup in non-desktop environments.
 
-**Configures Firewall:** Opens port 9115 (or custom if you change the PORT variable at the top of the script) if csf, firewalld, or ufw is installed.
+**Configures Firewall:** Opens TCP port 9115 (or custom if you change the PORT variable at the top of the script) if csf, firewalld, or ufw is installed.
 
 ## Post-Installation:
 
