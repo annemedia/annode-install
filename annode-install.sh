@@ -1,4 +1,3 @@
-
 #!/bin/bash
 # ANNODE Installation Script - Developer Documentation
 #
