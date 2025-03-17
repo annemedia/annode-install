@@ -12,7 +12,7 @@
 #   sudo bash annode-install.sh <NID> <SECRET> [lite]
 #   - <NID>: The ANNE Node ID (required)
 #   - <SECRET>: The ANNE Secret (required)
-#   - [lite]: Optional flag to enable lite mode (disables mempool and graph cleaning)
+#   - [lite]: Optional flag to enable lite mode (disables mempool)
 #
 # Script Flow:
 # 1. Root Check: Ensures the script runs with root privileges.
