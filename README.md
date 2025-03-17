@@ -127,7 +127,7 @@ Use your root password from the install output:
 
 **You must note these down from the terminal output, as they’re not stored anywhere else.**
 
-**Lite Mode:** It is also possible to run the annode in Lite mode (Spectator mode) with as little as: 1 CPU, 1GB RAM, 20GB HDD (Linux) - Use the lite flag for a lighter annode setup, reducing resource usage by disabling mempool and graph cleaning.
+**Lite Mode:** It is also possible to run the annode in Lite mode (Spectator mode), reducing memory usage by disabling mempool.
 
 # Additional Info:
 See the full annode documentation at https://www.anne.network/files
