@@ -116,7 +116,7 @@ get_package_manager() {
 
 command=$(get_package_manager)
 
-run="sudo $command update -y && $command upgrade -y"
+run="sudo $command update -y && sudo $command upgrade -y"
 eval "$run"
 
 install() {
