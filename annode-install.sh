@@ -70,17 +70,9 @@
 # License: The Unlicense License.
 #
 
-# Capture the calling user's environment variables
-CALLING_USER=$(logname 2>/dev/null || echo "$SUDO_USER" || whoami)
-USER_HOME=$(eval echo ~$CALLING_USER)  # Get the user's home directory
-USER_DESKTOP_SESSION=$DESKTOP_SESSION  # Capture the desktop session
-
 export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
 # Check if user is root
 [ $(id -u) != "0" ] && { echo "Error: You must use sudo or be root to run this script"; exit 1; }
-
-export HOME="$USER_HOME"
-export DESKTOP_SESSION="$USER_DESKTOP_SESSION"
 
 NID=$1
 SECRET=$2
@@ -93,6 +85,11 @@ if [ -z "$NID" ] || [ -z "$SECRET" ]; then
     echo "Execution aborted";
     exit 2;
 fi
+
+# Capture the calling user's environment variables
+CALLING_USER=$(logname 2>/dev/null || echo "$SUDO_USER" || whoami)
+USER_HOME=$(eval echo ~$CALLING_USER)  # Get the user's home directory
+USER_DESKTOP_SESSION=$DESKTOP_SESSION  # Capture the desktop session
 
 DB_NAME="annedb"
 DB_USER_NAME="anneroot"
