@@ -70,7 +70,7 @@
 # License: The Unlicense License.
 #
 
-# Capture the calling user's environment variables before sudo takes over
+# Capture the calling user's environment variables
 CALLING_USER=$(logname 2>/dev/null || echo "$SUDO_USER" || whoami)
 USER_HOME=$(eval echo ~$CALLING_USER)  # Get the user's home directory
 USER_DESKTOP_SESSION=$DESKTOP_SESSION  # Capture the desktop session
