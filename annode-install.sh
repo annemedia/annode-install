@@ -116,7 +116,7 @@ get_package_manager() {
 
 command=$(get_package_manager)
 
-run="$command update -y && $command upgrade -y"
+run="sudo $command update -y && $command upgrade -y"
 eval "$run"
 
 install() {
@@ -299,7 +299,7 @@ cd $DIR
     sudo chmod +x /usr/bin/annode.sh
 fi
 
-cp "$DIR/conf/node-default.properties" "$DIR/conf/node.properties"
+sudo cp "$DIR/conf/node-default.properties" "$DIR/conf/node.properties"
 
 if [[ $DESKTOP_SESSION == "" ]]; then
     sudo systemctl enable annode.service
