@@ -115,7 +115,7 @@ or
 
 Use your root password from the install output:
 
-`sudo bash annode-upgrade.sh restore '<your-root-password>'  `
+`sudo bash annode-upgrade.sh restore 'your-mariadb-root-password'  `
 
 # Troubleshooting:
 
