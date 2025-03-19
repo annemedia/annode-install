@@ -31,7 +31,7 @@ Download the Script:
 
 **DO NOT RUN THIS SCRIPT IF YOU HAVE EXISTING MARIADB DATABASES YOU CAN'T LOSE. If MariaDB is already installed, it will be reinstalled. Albeit, you’ll be prompted to purge it (losing existing databases) or abort.**
 
-`sudo bash annode-install.sh your-nid your-seed [lite]`
+`sudo -E bash annode-install.sh your-nid your-seed [lite]`
 
 - your-nid: Your ANNE Neuron ID (nid) (required)
 - your-seed: Your ANNE Secret (seed) (required)
@@ -42,7 +42,7 @@ Download the Script:
 `sudo bash annode-install.sh mynid mysecret`
 
 ##### Lite mode mainnet annode:
-`sudo bash annode-install.sh mynid mysecret 1`
+`sudo -E bash annode-install.sh mynid mysecret 1`
 
 ## What the Script Does:
 
