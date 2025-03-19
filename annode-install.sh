@@ -284,7 +284,7 @@ if [[ $DESKTOP_SESSION == "" ]]; then
 cd $DIR
 /usr/bin/java -jar anne-node.jar --headless" > /usr/bin/annode.sh
     sudo chmod +x /usr/bin/annode.sh
-    echo "[Unit]
+    sudo echo "[Unit]
   Description=Annode
   After=network.target
 [Service]
