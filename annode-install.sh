@@ -321,7 +321,7 @@ sudo sed -i "s/P2P.BootstrapPeers.*/P2P.BootstrapPeers=$PEERSLIST/" "$DIR/conf/n
 sudo sed -i "s/P2P.rebroadcastTo.*/P2P.rebroadcastTo=$PEERSLIST/" "$DIR/conf/node.properties"
  
 if [ -n "$LITE" ]; then
-  echo "anne.mempool = false" >> "$DIR/conf/node.properties"
+  sudo echo "anne.mempool = false" >> "$DIR/conf/node.properties"
 fi
 
 if type csf &> /dev/null; then
