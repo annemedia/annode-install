@@ -263,13 +263,13 @@ mysql --user=root --password="$DB_ROOT_USER_PASS" -e "CREATE DATABASE $DB_NAME D
 mysql --user=root --password="$DB_ROOT_USER_PASS" -e "CREATE USER $DB_USER_NAME@localhost IDENTIFIED BY '$DB_USER_PASS';"
 mysql --user=root --password="$DB_ROOT_USER_PASS" -e "GRANT ALL ON $DB_NAME.* TO '$DB_USER_NAME'@'localhost' IDENTIFIED BY '$DB_USER_PASS'; FLUSH PRIVILEGES;"
 
-wget -N -P $HOME https://anne.network/files/annedb-latest.sql.zip
+sudo wget -N -P $HOME https://anne.network/files/annedb-latest.sql.zip
 sudo unzip -o "$HOME/annedb-latest.sql.zip" -d $HOME
 echo "Restoring annedb snap. This should take a while. Please wait..."
-mysql -u root -p$DB_ROOT_USER_PASS $DB_NAME < "$HOME/annedb-latest.sql"
+sudo mysql -u root -p$DB_ROOT_USER_PASS $DB_NAME < "$HOME/annedb-latest.sql"
 rm -f "$HOME/annedb-latest.sql.zip"
 
-curl https://anne.network/files/anne-node.zip --output "$HOME/anne-node.zip"
+sudo curl https://anne.network/files/anne-node.zip --output "$HOME/anne-node.zip"
 sudo mkdir "$HOME/annode";
 DIR="$HOME/annode";
 sudo unzip -o "$HOME/anne-node.zip" -d $DIR
