@@ -264,7 +264,7 @@ mysql --user=root --password="$DB_ROOT_USER_PASS" -e "CREATE USER $DB_USER_NAME@
 mysql --user=root --password="$DB_ROOT_USER_PASS" -e "GRANT ALL ON $DB_NAME.* TO '$DB_USER_NAME'@'localhost' IDENTIFIED BY '$DB_USER_PASS'; FLUSH PRIVILEGES;"
 
 wget -N -P $HOME https://anne.network/files/annedb-latest.sql.zip
-unzip -o "$HOME/annedb-latest.sql.zip" -d $HOME
+sudo unzip -o "$HOME/annedb-latest.sql.zip" -d $HOME
 echo "Restoring annedb snap. This should take a while. Please wait..."
 mysql -u root -p$DB_ROOT_USER_PASS $DB_NAME < "$HOME/annedb-latest.sql"
 rm -f "$HOME/annedb-latest.sql.zip"
