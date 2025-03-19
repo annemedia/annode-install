@@ -295,7 +295,7 @@ cd $DIR
 [Install]
   WantedBy=multi-user.target" > /etc/systemd/system/annode.service
 else
-    echo "#!/bin/bash
+    sudo echo "#!/bin/bash
 cd $DIR
 /usr/bin/java -jar anne-node.jar" > /usr/bin/annode.sh
     sudo chmod +x /usr/bin/annode.sh
