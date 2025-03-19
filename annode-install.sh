@@ -116,6 +116,7 @@ get_package_manager() {
 
 command=$(get_package_manager)
 
+sudo dnf clean all
 run="sudo $command update -y && sudo $command upgrade -y"
 eval "$run"
 
@@ -306,18 +307,18 @@ if [[ $DESKTOP_SESSION == "" ]]; then
     sudo systemctl enable annode.service
 fi
 
-sed -i "s/DB.Username.*/DB.Username=$DB_USER_NAME/" "$DIR/conf/node.properties"
-sed -i "s/DB.Password.*/DB.Password=$DB_USER_PASS/" "$DIR/conf/node.properties"
-sed -i "s/anne.nodeAccountId.*/anne.nodeAccountId=$NID/" "$DIR/conf/node.properties"
-sed -i "s/anne.nodeSecret.*/anne.nodeSecret=$SECRET/" "$DIR/conf/node.properties"
+sudo sed -i "s/DB.Username.*/DB.Username=$DB_USER_NAME/" "$DIR/conf/node.properties"
+sudo sed -i "s/DB.Password.*/DB.Password=$DB_USER_PASS/" "$DIR/conf/node.properties"
+sudo sed -i "s/anne.nodeAccountId.*/anne.nodeAccountId=$NID/" "$DIR/conf/node.properties"
+sudo sed -i "s/anne.nodeSecret.*/anne.nodeSecret=$SECRET/" "$DIR/conf/node.properties"
 
 WANIP=$([ "$(ip link show | grep -c 'tun')" -gt 0 ] && (curl -4 -s ifconfig.me || curl -6 -s ifconfig.me) || (ip -4 route get 1.1.1.1 | grep -oP '(?<=src )[\d.]+' || ip -6 route get 2001:4860:4860::8888 | grep -oP '(?<=src )[\w:]+')); [ "${WANIP//:/}" != "$WANIP" ] && WANIP="[$WANIP]"
 
-sed -i "s/P2P.myAddress.*/P2P.myAddress=$WANIP:$PORT/" "$DIR/conf/node.properties"
-sed -i "s/P2P.NumBootstrapConnections.*/P2P.NumBootstrapConnections=25/" "$DIR/conf/node.properties"
+sudo sed -i "s/P2P.myAddress.*/P2P.myAddress=$WANIP:$PORT/" "$DIR/conf/node.properties"
+sudo sed -i "s/P2P.NumBootstrapConnections.*/P2P.NumBootstrapConnections=25/" "$DIR/conf/node.properties"
 
-sed -i "s/P2P.BootstrapPeers.*/P2P.BootstrapPeers=$PEERSLIST/" "$DIR/conf/node.properties"
-sed -i "s/P2P.rebroadcastTo.*/P2P.rebroadcastTo=$PEERSLIST/" "$DIR/conf/node.properties"
+sudo sed -i "s/P2P.BootstrapPeers.*/P2P.BootstrapPeers=$PEERSLIST/" "$DIR/conf/node.properties"
+sudo sed -i "s/P2P.rebroadcastTo.*/P2P.rebroadcastTo=$PEERSLIST/" "$DIR/conf/node.properties"
  
 if [ -n "$LITE" ]; then
   echo "anne.mempool = false" >> "$DIR/conf/node.properties"
@@ -327,12 +328,12 @@ if type csf &> /dev/null; then
     # Configure CSF
     current_tcp_in=$(grep 'TCP_IN' /etc/csf/csf.conf | cut -d'=' -f2 | tr -d ' ')
     if [[ ! "$current_tcp_in" =~ "$PORT" ]]; then
-        sed -i "s/^TCP_IN = .*/TCP_IN = \"${current_tcp_in},$PORT\"/" /etc/csf/csf.conf
+        sudo sed -i "s/^TCP_IN = .*/TCP_IN = \"${current_tcp_in},$PORT\"/" /etc/csf/csf.conf
     fi
 
     current_tcp_out=$(grep 'TCP_OUT' /etc/csf/csf.conf | cut -d'=' -f2 | tr -d ' ')
     if [[ ! "$current_tcp_out" =~ "$PORT" ]]; then
-        sed -i "s/^TCP_OUT = .*/TCP_OUT = \"${current_tcp_out},$PORT\"/" /etc/csf/csf.conf
+        sudo sed -i "s/^TCP_OUT = .*/TCP_OUT = \"${current_tcp_out},$PORT\"/" /etc/csf/csf.conf
     fi
     csf -r
 elif type firewall-cmd &> /dev/null; then
