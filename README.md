@@ -58,7 +58,7 @@ Download the Script:
 
 **Sets Up Service:** Creates a systemd service (annode.service) for automatic startup in non-desktop environments.
 
-**Configures Firewall:** Opens TCP port 9115 (or custom if you change the PORT variable at the top of the script) if csf, firewalld, or ufw is installed.
+**Configures Linux Firewall:** Opens TCP port 9115 (or custom if you change the PORT variable at the top of the script) if csf, firewalld, or ufw is installed.
 
 ## Post-Installation:
 
@@ -119,7 +119,7 @@ Use your root password from the install output:
 
 **MariaDB Conflicts:** If MariaDB is already installed, you’ll be prompted to purge it (losing existing databases) or abort.
 
-**Port Issues:** Ensure port 9115 or custom port (if you changed it) is open if using a custom firewall other than csf, uwf or firewalld; the script skips this if no supported firewall is detected.
+**Port Issues:** Ensure port 9115 or custom port (if you changed it) is open if using a custom firewall other than csf, uwf or firewalld; the script skips this if no supported firewall is detected. Also if you're on LAN and behind a router, make sure the port is open/forwarded to your LAN IP in your router firewall.
 
 ### Important Notes:
 
