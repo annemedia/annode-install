@@ -68,6 +68,10 @@ After running the script, you’ll see terminal output with important details:
 
 **Record these immediately—they are not saved elsewhere and are needed for database access.**
 
+### Before starting the annode:
+
+If you're on LAN or behind a router, make sure the P2P port (9115 or custom) is open/forwarded to your LAN IP in your router firewall.
+
 ### Starting the annode:
 
 **Headless environment:** The annode is enabled to start on boot via systemd service automatically.
@@ -119,7 +123,7 @@ Use your root password from the install output:
 
 **MariaDB Conflicts:** If MariaDB is already installed, you’ll be prompted to purge it (losing existing databases) or abort.
 
-**Port Issues:** Ensure port 9115 or custom port (if you changed it) is open if using a custom firewall other than csf, uwf or firewalld; the script skips this if no supported firewall is detected. Also if you're on LAN and behind a router, make sure the port is open/forwarded to your LAN IP in your router firewall.
+**Port Issues:** Ensure port 9115 or custom port (if you changed it) is open if using a custom firewall other than csf, uwf or firewalld; the script skips this if no supported firewall is detected. Also if you're on LAN or behind a router, make sure the port is open/forwarded to your LAN IP in your router firewall.
 
 ### Important Notes:
 
