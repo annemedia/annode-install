@@ -31,6 +31,8 @@ Download the Script:
 
 **DO NOT RUN THIS SCRIPT IF YOU HAVE EXISTING MARIADB DATABASES YOU CAN'T LOSE. If MariaDB is already installed, it will be reinstalled. Albeit, you’ll be prompted to purge it (losing existing databases) or abort.**
 
+**NB:** This script requires 'sudo -E' to preserve the user environment
+
 `sudo -E bash annode-install.sh your-nid your-seed [lite]`
 
 - your-nid: Your ANNE Neuron ID (nid) (required)
