@@ -54,7 +54,7 @@
 # - MariaDB Server 10.5+
 #
 # Important Developer Notes:
-# - The script assumes network connectivity for downloads from anne.network.
+# - The script assumes network connectivity for downloads from www.anne.network.
 # - No explicit error handling for failed downloads or database imports; relies on command exit codes.
 # - The install() function has a redundant structure but is functional.
 # - Firewall configuration skips silently if no supported firewall is found.
@@ -264,14 +264,14 @@ sudo mysql --user=root --password="$DB_ROOT_USER_PASS" -e "CREATE DATABASE $DB_N
 sudo mysql --user=root --password="$DB_ROOT_USER_PASS" -e "CREATE USER $DB_USER_NAME@localhost IDENTIFIED BY '$DB_USER_PASS';"
 sudo mysql --user=root --password="$DB_ROOT_USER_PASS" -e "GRANT ALL ON $DB_NAME.* TO '$DB_USER_NAME'@'localhost' IDENTIFIED BY '$DB_USER_PASS'; FLUSH PRIVILEGES;"
 
-sudo wget -N -P $HOME https://anne.network/files/annedb-latest.sql.zip
+sudo wget -N -P $HOME https://www.anne.network/files/annedb-latest.sql.zip
 sudo unzip -o "$HOME/annedb-latest.sql.zip" -d $HOME
 echo "Restoring annedb snap. This should take a while. Please wait..."
 sudo mysql -u root -p$DB_ROOT_USER_PASS $DB_NAME < "$HOME/annedb-latest.sql"
 sudo rm -f "$HOME/annedb-latest.sql.zip"
 sudo rm -f "$HOME/annedb-latest.sql"
 
-sudo curl https://anne.network/files/anne-node.zip --output "$HOME/anne-node.zip"
+sudo curl https://www.anne.network/files/anne-node.zip --output "$HOME/anne-node.zip"
 sudo mkdir "$HOME/annode";
 DIR="$HOME/annode";
 sudo unzip -o "$HOME/anne-node.zip" -d $DIR
@@ -282,7 +282,7 @@ sudo chown -R $USER:$USER "$HOME/annode"
 if [[ $DESKTOP_SESSION == "" ]]; then
     echo "#!/bin/bash
 cd $DIR
-/usr/bin/java -jar anne-node.jar --headless" > /usr/bin/annode.sh
+    java -jar anne-node.jar --headless" > /usr/bin/annode.sh
     sudo chmod +x /usr/bin/annode.sh
     sudo echo "[Unit]
   Description=Annode
@@ -297,7 +297,7 @@ cd $DIR
 else
     sudo echo "#!/bin/bash
 cd $DIR
-/usr/bin/java -jar anne-node.jar" > /usr/bin/annode.sh
+    java -jar anne-node.jar" > /usr/bin/annode.sh
     sudo chmod +x /usr/bin/annode.sh
 fi
 
