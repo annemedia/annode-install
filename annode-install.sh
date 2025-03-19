@@ -70,9 +70,17 @@
 # License: The Unlicense License.
 #
 
+# Capture the calling user's environment variables before sudo takes over
+CALLING_USER=$(whoami)
+USER_HOME=$(eval echo ~$CALLING_USER)  # Get the user's home directory
+USER_DESKTOP_SESSION=$DESKTOP_SESSION  # Capture the desktop session
+
 export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
 # Check if user is root
 [ $(id -u) != "0" ] && { echo "Error: You must use sudo or be root to run this script"; exit 1; }
+
+export HOME="$USER_HOME"
+export DESKTOP_SESSION="$USER_DESKTOP_SESSION"
 
 NID=$1
 SECRET=$2
@@ -264,22 +272,22 @@ sudo mysql --user=root --password="$DB_ROOT_USER_PASS" -e "CREATE DATABASE $DB_N
 sudo mysql --user=root --password="$DB_ROOT_USER_PASS" -e "CREATE USER $DB_USER_NAME@localhost IDENTIFIED BY '$DB_USER_PASS';"
 sudo mysql --user=root --password="$DB_ROOT_USER_PASS" -e "GRANT ALL ON $DB_NAME.* TO '$DB_USER_NAME'@'localhost' IDENTIFIED BY '$DB_USER_PASS'; FLUSH PRIVILEGES;"
 
-sudo wget -N -P $HOME https://www.anne.network/files/annedb-latest.sql.zip
-sudo unzip -o "$HOME/annedb-latest.sql.zip" -d $HOME
+sudo wget -N -P $USER_HOME https://www.anne.network/files/annedb-latest.sql.zip
+sudo unzip -o "$USER_HOME/annedb-latest.sql.zip" -d $USER_HOME
 echo "Restoring annedb snap. This should take a while. Please wait..."
-sudo mysql -u root -p$DB_ROOT_USER_PASS $DB_NAME < "$HOME/annedb-latest.sql"
-sudo rm -f "$HOME/annedb-latest.sql.zip"
-sudo rm -f "$HOME/annedb-latest.sql"
+sudo mysql -u root -p$DB_ROOT_USER_PASS $DB_NAME < "$USER_HOME/annedb-latest.sql"
+sudo rm -f "$USER_HOME/annedb-latest.sql.zip"
+sudo rm -f "$USER_HOME/annedb-latest.sql"
 
-sudo curl https://www.anne.network/files/anne-node.zip --output "$HOME/anne-node.zip"
-sudo mkdir "$HOME/annode";
-DIR="$HOME/annode";
-sudo unzip -o "$HOME/anne-node.zip" -d $DIR
-sudo rm -f "$HOME/anne-node.zip"
+sudo curl https://www.anne.network/files/anne-node.zip --output "$USER_HOME/anne-node.zip"
+sudo mkdir "$USER_HOME/annode";
+DIR="$USER_HOME/annode";
+sudo unzip -o "$USER_HOME/anne-node.zip" -d $DIR
+sudo rm -f "$USER_HOME/anne-node.zip"
 
-sudo chown -R $USER:$USER "$HOME/annode"
+sudo chown -R $CALLING_USER:$CALLING_USER "$USER_HOME/annode"
 
-if [[ $DESKTOP_SESSION == "" ]]; then
+if [[ $USER_DESKTOP_SESSION == "" ]]; then
     echo "#!/bin/bash
 cd $DIR
     java -jar anne-node.jar --headless" > /usr/bin/annode.sh
@@ -303,7 +311,7 @@ fi
 
 sudo cp "$DIR/conf/node-default.properties" "$DIR/conf/node.properties"
 
-if [[ $DESKTOP_SESSION == "" ]]; then
+if [[ $USER_DESKTOP_SESSION == "" ]]; then
     sudo systemctl enable annode.service
 fi
 
@@ -369,7 +377,7 @@ echo -e "\e[32m--------------------------------------------------------------\e[
 echo "Your 'anneroot' user password for the '$DB_NAME' database is:"
 echo "$DB_USER_PASS"
 echo -e "\e[32m--------------------------------------------------------------\e[0m"
-if [[ $DESKTOP_SESSION == "" ]]; then
+if [[ $USER_DESKTOP_SESSION == "" ]]; then
     echo "The ANNE node is configured to start automatically in headless mode."
     echo "To start the node now, run:"
     echo "sudo systemctl start annode.service"
