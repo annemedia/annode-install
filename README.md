@@ -74,6 +74,8 @@ After running the script, you’ll see terminal output with important details:
 
 If you're on LAN or behind a router, make sure the P2P port (9115 or custom) is open/forwarded to your LAN IP in your router firewall.
 
+If you're on a VPN, the P2P port should be forwarded to your TUN interface IP at the VPN server level. Some VPN providers support this. If cannot forward port at the VPN server level, some annode functions will be limited, you will not get inbound connectivity with other peers. Nevertheless your annode will be able to keep up-to-date with blocks and will be able to send outbound transactions.
+
 ### Starting the annode:
 
 **Headless environment:** The annode is enabled to start on boot via systemd service automatically.
