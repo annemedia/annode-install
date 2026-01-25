@@ -11,7 +11,7 @@ It installs dependencies, configures MariaDB, restores the latest database snaps
 **Supported Distributions:** Debian-based or RHEL-based (tested on Debian 11 & 12, Ubuntu 20 & 22, Rocky Linux 8 & 9, AlmaLinux 8 & 9).
 
 **Onboarded ANNE Account:** You need a Neuron ID (NID) and Secret (SEED).
-Generate your keys at https://www.anne.network/aon.html if you don’t have them.
+Generate your keys at https://www.anne.network:9116/aon.html if you don’t have them.
 
 **All ANNE accounts must be onboarded to be active.
 The account must receive coins or win a SOLO block reward to be onboard.
