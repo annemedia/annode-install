@@ -68,7 +68,7 @@ After running the script, you’ll see terminal output with important details:
 
 **MariaDB Passwords:** The root password and anneroot user password for the annedb database.
 
-**Record these immediately—they are not saved elsewhere and are needed for database access.**
+**Record these immediately - they are not saved elsewhere and are needed for database access.**
 
 ### Before starting the annode:
 
