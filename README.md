@@ -10,15 +10,13 @@ It installs dependencies, configures MariaDB, restores the latest database snaps
 
 **Supported Distributions:** Debian-based or RHEL-based (tested on Debian 11 & 12, Ubuntu 20 & 22, Rocky Linux 8 & 9, AlmaLinux 8 & 9).
 
-**Onboarded ANNE Account:** You need a Neuron ID (NID) and Secret (SEED).
+**ANNE Account:** You need a Neuron ID (NID) and Secret (SEED).
 Generate your keys at https://www.anne.network:9116/aon.html if you don’t have them.
 
-**All ANNE accounts must be onboarded to be active.
-The account must receive coins or win a SOLO block reward to be onboard.
-To receive coins, the new account must provide the PUBKEY to the sender of coins.
-The sender uses the PUBKEY to onboard the new account and register the new NID onchain.**
+**All ANNE accounts must be onboarded to be active.**
+To use ANNE, every account must be onboarded by receipt of a transaction. You can get some annecoins at ADF Swaps or ask someone you know to send you a few annecoins. Doing a swap (for any amount) will automatically register your NID and public key, and deposit coins into your account.
 
-If you are new to ANNE and cannot self-onboard, message us with your NID & PUB on Telegram at https://t.me/anne_unplugged or contact ANNE Media at https://x.com/annemedia_web
+https://www.anne.network:9116/aon.html?page=swaps
 
 ## Installation: 
 
