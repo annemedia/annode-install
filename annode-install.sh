@@ -22,7 +22,7 @@
 # 5. MariaDB Setup:
 #    - Checks and upgrades MariaDB to 10.5+ if needed.
 #    - Purges existing MariaDB if present (with user consent).
-#    - Configures database and user with random passwords.
+#    - Configures database and sets a random root password.
 #    - Restores latest ANNE mainnet snapshot.
 # 6. Node Deployment:
 #    - Downloads and extracts the ANNE node software.
@@ -34,11 +34,11 @@
 # Key Variables:
 # - NID, SECRET, LITE: Command-line arguments.
 # - DB_NAME: "annedb" - Mainnet database name.
-# - DB_USER_NAME: "anneroot" - MariaDB user.
+# - DB_USER_NAME: "root" - MariaDB user.
 # - MIN_MARIA_VERSION: "10.5" - Minimum required MariaDB version.
 # - PORT: "9115" - P2P port for the node (can be custom, change it if you wish)
 # - PEERSLIST: Semicolon-separated list of bootstrap peers IPs
-# - DB_USER_PASS, DB_ROOT_USER_PASS: Generated random passwords for MariaDB.
+# - DB_ROOT_USER_PASS: Generated random password for MariaDB root user.
 #
 # Key Functions:
 # - get_package_manager(): Detects the package manager (apt, dnf, yum).
@@ -62,10 +62,7 @@
 #
 # ***IMPORTANT NOTE FOR USERS AND DEVELOPERS***
 # At the end of execution, the script prints critical instructions, including
-# the generated MariaDB passwords for the root user (DB_ROOT_USER_PASS) and
-# the 'anneroot' user (DB_USER_PASS). These are not stored elsewhere in this
-# script and are essential for database access. Users MUST manually note these
-# passwords from the terminal output.
+# the generated MariaDB root password (DB_ROOT_USER_PASS). Users should manually note the passwords from the terminal output.
 #
 # License: The Unlicense License.
 #
@@ -92,7 +89,7 @@ USER_HOME=$(eval echo ~$CALLING_USER)  # Get the user's home directory
 USER_DESKTOP_SESSION=$DESKTOP_SESSION  # Capture the desktop session
 
 DB_NAME="annedb"
-DB_USER_NAME="anneroot"
+DB_USER_NAME="root"
 MIN_MARIA_VERSION="10.5"
 PORT="9115"
 
@@ -155,8 +152,7 @@ clear
 eval "$run"
 clear
 
-DB_USER_PASS=$(sudo cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 21 | head -n 1);
-DB_ROOT_USER_PASS="r00tXyZ$DB_USER_PASS";
+DB_ROOT_USER_PASS=$(sudo cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 21 | head -n 1);
 
 checkMariaCandidateVersion () {
   versionltMIN=0
@@ -262,12 +258,16 @@ sudo systemctl restart mariadb
 echo "--------------------------------------------------------------"
 echo "configuring MariaDB"
 echo "--------------------------------------------------------------"
-sudo mysqladmin --user=root password "$DB_ROOT_USER_PASS"
-printf "$DB_ROOT_USER_PASS\n n\n Y\n Y\n Y\n Y\n" | sudo mysql_secure_installation
-# sudo mysql -e "SET PASSWORD FOR root@localhost = PASSWORD('$DB_ROOT_USER_PASS');FLUSH PRIVILEGES;"
+sudo mysqladmin --user=root password "$DB_ROOT_USER_PASS".
+
+# printf "$DB_ROOT_USER_PASS\n n\n Y\n Y\n Y\n Y\n" | sudo mysql_secure_installation
+sudo mysql --user=root --password="$DB_ROOT_USER_PASS" -e "DELETE FROM mysql.user WHERE User='';"
+sudo mysql --user=root --password="$DB_ROOT_USER_PASS" -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"
+sudo mysql --user=root --password="$DB_ROOT_USER_PASS" -e "DROP DATABASE IF EXISTS test;"
+sudo mysql --user=root --password="$DB_ROOT_USER_PASS" -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';"
+sudo mysql --user=root --password="$DB_ROOT_USER_PASS" -e "FLUSH PRIVILEGES;"
+
 sudo mysql --user=root --password="$DB_ROOT_USER_PASS" -e "CREATE DATABASE $DB_NAME DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci;"
-sudo mysql --user=root --password="$DB_ROOT_USER_PASS" -e "CREATE USER $DB_USER_NAME@localhost IDENTIFIED BY '$DB_USER_PASS';"
-sudo mysql --user=root --password="$DB_ROOT_USER_PASS" -e "GRANT ALL ON $DB_NAME.* TO '$DB_USER_NAME'@'localhost' IDENTIFIED BY '$DB_USER_PASS'; FLUSH PRIVILEGES;"
 
 sudo wget -N -P $USER_HOME https://www.anne.network/files/annedb-latest.sql.zip
 sudo unzip -o "$USER_HOME/annedb-latest.sql.zip" -d $USER_HOME
@@ -313,7 +313,7 @@ if [[ $USER_DESKTOP_SESSION == "" ]]; then
 fi
 
 sudo sed -i "s/DB.Username.*/DB.Username=$DB_USER_NAME/" "$DIR/conf/node.properties"
-sudo sed -i "s/DB.Password.*/DB.Password=$DB_USER_PASS/" "$DIR/conf/node.properties"
+sudo sed -i "s/DB.Password.*/DB.Password=$DB_ROOT_USER_PASS/" "$DIR/conf/node.properties"
 sudo sed -i "s/anne.nodeAccountId.*/anne.nodeAccountId=$NID/" "$DIR/conf/node.properties"
 sudo sed -i "s/anne.nodeSecret.*/anne.nodeSecret=$SECRET/" "$DIR/conf/node.properties"
 
@@ -371,9 +371,6 @@ echo "Welcome to...
 echo "Your MariaDB root password is:"
 echo "$DB_ROOT_USER_PASS"
 echo -e "\e[32m--------------------------------------------------------------\e[0m"
-echo "Your 'anneroot' user password for the '$DB_NAME' database is:"
-echo "$DB_USER_PASS"
-echo -e "\e[32m--------------------------------------------------------------\e[0m"
 if [[ $USER_DESKTOP_SESSION == "" ]]; then
     echo "The ANNE node is configured to start automatically in headless mode."
     echo "To start the node now, run:"
@@ -403,6 +400,5 @@ echo -e "\e[32m--------------------------------------------------------------\e[
 echo "To upgrade and restore the '$DB_NAME' database from a snapshot, run:"
 echo "sudo bash annode-upgrade.sh restore '$DB_ROOT_USER_PASS'"
 echo -e "\e[32m--------------------------------------------------------------\e[0m"
-echo "IMPORTANT: Save the MariaDB passwords above. They are not stored elsewhere 
-and are required for database access."
+echo "IMPORTANT: Save the MariaDB password above."
 echo -e "\e[32m--------------------------------------------------------------\e[0m"
