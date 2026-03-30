@@ -54,7 +54,7 @@
 # - MariaDB Server 10.5+
 #
 # Important Developer Notes:
-# - The script assumes network connectivity for downloads from www.anne.network.
+# - The script assumes network connectivity for downloads from anne.media.
 # - No explicit error handling for failed downloads or database imports; relies on command exit codes.
 # - The install() function has a redundant structure but is functional.
 # - Firewall configuration skips silently if no supported firewall is found.
@@ -78,7 +78,7 @@ LITE=$3
 if [ -z "$NID" ] || [ -z "$SECRET" ]; then
     echo "Error: You must provide NID and SEED in arguments of this script.";
     echo "Run: sudo bash annode-install.sh yournid yourseed";
-    echo "if you don't have NID and SEED, generate new ANNE account at https://www.anne.network/aon.html";
+    echo "if you don't have NID and SEED, generate new ANNE account at https://anne.media/personal-server-setup-anne-installation-guide";
     echo "Execution aborted";
     exit 2;
 fi
@@ -112,7 +112,7 @@ get_package_manager() {
       unzip
       java jdk 17\e[0m
       
-      See https://www.anne.network/files for further instructions."
+      See https://anne.media/personal-server-setup-anne-installation-guide for further instructions."
     exit 3;
 }
 
@@ -269,14 +269,14 @@ sudo mysql --user=root --password="$DB_ROOT_USER_PASS" -e "FLUSH PRIVILEGES;"
 
 sudo mysql --user=root --password="$DB_ROOT_USER_PASS" -e "CREATE DATABASE $DB_NAME DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci;"
 
-sudo wget -N -P $USER_HOME https://www.anne.network/files/annedb-latest.sql.zip
+sudo wget -N -P $USER_HOME https://anne.media/mirror/anne-node/annedb-latest.sql.zip
 sudo unzip -o "$USER_HOME/annedb-latest.sql.zip" -d $USER_HOME
 echo "Restoring annedb snap. This should take a while. Please wait..."
 sudo mysql -u root -p$DB_ROOT_USER_PASS $DB_NAME < "$USER_HOME/annedb-latest.sql"
 sudo rm -f "$USER_HOME/annedb-latest.sql.zip"
 sudo rm -f "$USER_HOME/annedb-latest.sql"
 
-sudo curl https://www.anne.network/files/anne-node.zip --output "$USER_HOME/anne-node.zip"
+sudo curl https://anne.media/mirror/anne-node/anne-node.zip --output "$USER_HOME/anne-node.zip"
 sudo mkdir "$USER_HOME/annode";
 DIR="$USER_HOME/annode";
 sudo unzip -o "$USER_HOME/anne-node.zip" -d $DIR
