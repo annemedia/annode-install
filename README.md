@@ -52,7 +52,7 @@ Download the Script:
 
 **Installs Dependencies:** Updates the system, installs Java 17, MariaDB 10.5+, and needed tools - wget, curl, and unzip.
 
-**Configures MariaDB:** Sets up the annedb database with a root user and anneroot user, both with random passwords; restores the latest snapshot from https://anne.network.
+**Configures MariaDB:** Sets up the annedb database with a root user and anneroot user, both with random passwords; restores the latest snapshot from https://anne.media/mirror/anne-node/annedb-latest.sql.zip
 
 **Deploys the Node:** Downloads and configures the ANNE node in $HOME/annode, using your NID and SEED.
 
@@ -136,7 +136,7 @@ Use your root password from the install output:
 **Lite Mode:** It is also possible to run the annode in Lite mode (Spectator mode), reducing memory usage by disabling mempool.
 
 # Additional Info:
-See the full annode documentation at https://www.anne.network/files
+See the full annode documentation at https://anne.media/personal-server-setup-anne-installation-guide/
 
 # Contribution & Collaboration:
 
