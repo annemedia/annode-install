@@ -101,7 +101,7 @@ if [ "$RESTORESNAP" == "restore" ]; then
         
     done
    
-   wget -N -P $HOME https://www.anne.network/files/annedb-latest.sql.zip
+   wget -N -P $HOME https://anne.media/mirror/anne-node/annedb-latest.sql.zip
    unzip -o "$HOME/annedb-latest.sql.zip" -d $HOME
 
    echo "Restoring annedb snap. Please wait..."
@@ -113,7 +113,7 @@ if [ "$RESTORESNAP" == "restore" ]; then
 fi
 
 echo "Getting new annode version. Please wait..."
-curl https://www.anne.network/files/anne-node.zip --output "$HOME/anne-node.zip"
+curl https://anne.media/mirror/anne-node/anne-node.zip --output "$HOME/anne-node.zip"
 DIR="$HOME/annode";
 sudo unzip -o "$HOME/anne-node.zip" -d $DIR
 sudo rm -f "$HOME/anne-node.zip"
@@ -125,6 +125,6 @@ fi
 
 echo "----------------------------------------------------"
 echo "If a new version was available at" 
-echo "https://www.anne.network/files/anne-node.zip"
+echo "https://anne.media/mirror/anne-node/anne-node.zip"
 echo "then your annode has been upgraded."
 echo "----------------------------------------------------"
