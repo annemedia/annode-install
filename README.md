@@ -140,7 +140,13 @@ See the full annode documentation at https://anne.media/personal-server-setup-an
 
 # Contribution & Collaboration:
 
-If you are a software developer and excited to work with ANNE technology, message us at https://t.me/anne_unplugged or contact ANNE Media at https://x.com/annemedia_web
+We welcome contributions! You can help by:
+
+- Reporting bugs or suggesting features via GitHub Issues
+- Submitting pull requests for bug fixes or improvements
+- Improving documentation
+  
+For discussions, join our community at ANNE Forum - https://annetalk.org
 
 The install script has a limitation if MariaDB is already installed and there are any existing databases present. On user confirmation, these databases would be lost. A pull request to the following specification will be accepted:
 
