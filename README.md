@@ -138,7 +138,7 @@ Use your root password from the install output:
 # Additional Info:
 See the full annode documentation at https://anne.media/personal-server-setup-anne-installation-guide/
 
-# Contribution & Collaboration:
+## Contribution & Collaboration:
 
 We welcome contributions! You can help by:
 
@@ -164,7 +164,7 @@ The install script has a limitation if MariaDB is already installed and there ar
 
 Compatibility adjustments for unsupported Linux distributions
   
-# LIMITATIONS
+## LIMITATIONS
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
