@@ -93,7 +93,7 @@ DB_USER_NAME="root"
 MIN_MARIA_VERSION="10.5"
 PORT="9115"
 
-PEERSLIST="65.109.89.77:9115;148.251.136.43:9772;116.203.230.116:9115;23.95.167.208:9115;148.251.136.43:8115;"
+PEERSLIST="5550988500620022983;14270667173691107670;11111193152608197523;17116940212960259068;6202683298237319346;2232130546139110946;"
 
 # Detect PM
 get_package_manager() {
@@ -319,11 +319,10 @@ sudo sed -i "s/anne.nodeSecret.*/anne.nodeSecret=$SECRET/" "$DIR/conf/node.prope
 
 WANIP=$([ "$(ip link show | grep -c 'tun')" -gt 0 ] && (curl -4 -s ifconfig.me || curl -6 -s ifconfig.me) || (ip -4 route get 1.1.1.1 | grep -oP '(?<=src )[\d.]+' || ip -6 route get 2001:4860:4860::8888 | grep -oP '(?<=src )[\w:]+')); [ "${WANIP//:/}" != "$WANIP" ] && WANIP="[$WANIP]"
 
-sudo sed -i "s/P2P.myAddress.*/P2P.myAddress=$WANIP:$PORT/" "$DIR/conf/node.properties"
 sudo sed -i "s/P2P.NumBootstrapConnections.*/P2P.NumBootstrapConnections=25/" "$DIR/conf/node.properties"
 
-sudo sed -i "s/P2P.BootstrapPeers.*/P2P.BootstrapPeers=$PEERSLIST/" "$DIR/conf/node.properties"
-sudo sed -i "s/P2P.rebroadcastTo.*/P2P.rebroadcastTo=$PEERSLIST/" "$DIR/conf/node.properties"
+sudo sed -i "s/P2P.BootstrapNidPeers.*/P2P.BootstrapNidPeers=$PEERSLIST/" "$DIR/conf/node.properties"
+sudo sed -i "s/P2P.reBroadcastToNidPeers.*/P2P.reBroadcastToNidPeers=$PEERSLIST/" "$DIR/conf/node.properties"
  
 if [ -n "$LITE" ]; then
   sudo echo "anne.mempool = false" >> "$DIR/conf/node.properties"
